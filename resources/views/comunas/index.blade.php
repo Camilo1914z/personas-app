@@ -23,6 +23,8 @@
                     <th scope="col">Code</th>
                     <th scope="col">Commune</th>
                     <th scope="col">Municipality</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">País</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -32,6 +34,8 @@
                         <th scope="row">{{$comuna->comu_codi}}</th>
                         <td>{{$comuna->comu_nomb}}</td>
                         <td>{{$comuna->muni_nomb}}</td>
+                        <td>{{ $comuna->depa_nomb ?? 'Departamento no especificado' }}</td>
+                        <td>{{ $comuna->pais_nomb ?? 'País no especificado' }}</td>
                         <td>
                             <a href="{{ route('comunas.edit', ['comuna' => $comuna->comu_codi]) }}" class="btn btn-info">Edit</a></li>
 
