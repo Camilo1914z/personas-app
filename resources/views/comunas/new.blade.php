@@ -37,25 +37,7 @@
                 @endforeach
             </select>
 
-            <div class="mb-3">
-              <label for="depa_codi">Departamento:</label>
-              <select class="form-select" id="depa_codi" name="depa_codi" required>
-                  <option selected disabled value="">Escoge...</option>
-                  @foreach ($departamentos as $departamento)
-                      <option value="{{ $departamento->depa_codi }}">{{ $departamento->depa_nomb }}</option>
-                  @endforeach
-              </select>
-          </div>
-
-          <div class="mb-3">
-              <label for="pais_codi">País:</label>
-              <select class="form-select" id="pais_codi" name="pais_codi" required>
-                  <option selected disabled value="">Escoge...</option>
-                  @foreach ($paises as $pais)
-                      <option value="{{ $pais->pais_codi }}">{{ $pais->pais_nomb }}</option>
-                  @endforeach
-              </select>
-          </div>
+           
 
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Save</button>

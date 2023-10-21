@@ -29,13 +29,14 @@
                 </tr>
             </thead>
             <tbody>
+                {{-- {{ dd($comunas); }} --}}
                 @foreach ($comunas as $comuna)
                     <tr>
                         <th scope="row">{{$comuna->comu_codi}}</th>
                         <td>{{$comuna->comu_nomb}}</td>
-                        <td>{{$comuna->muni_nomb}}</td>
-                        <td>{{ $comuna->depa_nomb ?? 'Departamento no especificado' }}</td>
-                        <td>{{ $comuna->pais_nomb ?? 'País no especificado' }}</td>
+                        <td>{{$comuna->municipio->muni_nomb ?? 'Municipio Vacio'}}</td>
+                        <td>{{ $comuna->municipio->departamento->depa_nomb ?? 'Departamento no especificado' }}</td>
+                        <td>{{ $comuna->municipio->departamento->pais->pais_nomb ?? 'País no especificado' }}</td>
                         <td>
                             <a href="{{ route('comunas.edit', ['comuna' => $comuna->comu_codi]) }}" class="btn btn-info">Edit</a></li>
 

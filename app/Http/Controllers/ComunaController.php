@@ -17,12 +17,15 @@ class ComunaController extends Controller
      */
     public function index()
     {
-        //$comunas = Comuna::all();
-        $comunas = DB::table('tb_comuna')
-            ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
-            ->join('tb_departamento', 'tb_municipio.depa_codi', '=', 'tb_departamento.depa_codi')
-            ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
-            ->get();
+        $comunas = Comuna::all();
+        // $comunas = DB::table('tb_comuna')
+        //     ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
+        //     ->join('tb_departamento', 'tb_municipio.depa_codi', '=', 'tb_departamento.depa_codi')
+        //     ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
+        //     ->get();
+
+        //dd($comunas);
+
         return view("comunas.index", ["comunas" => $comunas]);
     }
 
@@ -36,7 +39,7 @@ class ComunaController extends Controller
         $municipios = DB::table('tb_municipio')->orderBy('muni_nomb')->get();
         $departamentos = DB::table('tb_departamento')->orderBy('depa_nomb')->get();
         $paises = DB::table('tb_pais')->orderBy('pais_nomb')->get();
-    
+
         return view('comunas.new', [
             'municipios' => $municipios,
             'departamentos' => $departamentos,
@@ -57,17 +60,9 @@ class ComunaController extends Controller
         $comuna->muni_codi = $request->code;
         $comuna->save();
 
-        // Obtén nuevamente la lista actualizada de municipios
-        $municipios = DB::table('tb_municipio')
-            ->orderBy('muni_nomb')
-            ->get();
+        return redirect()->route('comunas.index') ;
 
-        $comunas = DB::table('tb_comuna')
-            ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
-            ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
-            ->get();
-
-        return view('comunas.index', ['comunas' => $comunas, 'municipios' => $municipios]);
+      
     }
     
 
@@ -93,13 +88,13 @@ class ComunaController extends Controller
         $comuna = Comuna::find($id);
         $municipios = DB::table('tb_municipio')->orderBy('muni_nomb')->get();
         $departamentos = DB::table('tb_departamento')->orderBy('depa_nomb')->get();
-        $paises = DB::table('tb_pais')->orderBy('pais_nomb')->get(); // Obtener los países
+        $paises = DB::table('tb_pais')->orderBy('pais_nomb')->get(); 
 
     return view('comunas.edit', [
         'comuna' => $comuna,
         'municipios' => $municipios,
         'departamentos' => $departamentos,
-        'paises' => $paises, // Pasar los países a la vista
+        'paises' => $paises,
     ]);
     }
 
@@ -118,11 +113,8 @@ class ComunaController extends Controller
         $comuna->muni_codi = $request->code;
         $comuna->save();
     
-        $comunas = DB::table('tb_comuna')
-            ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
-            ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
-            ->get();
-        return view('comunas.index', ['comunas' => $comunas]); 
+        
+        return redirect()->route('comunas.index') ;
     }
 
     /**

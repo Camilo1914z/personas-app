@@ -44,30 +44,7 @@
                 @endforeach
             </select>
 
-            <div class="mb-3">
-              <label for="depa_codi" class="form-label">Departamento</label>
-              <select class="form-select" id="depa_codi" name="depa_codi">
-                  <option value="">Seleccionar departamento</option>
-                  @foreach ($departamentos as $departamento)
-                  <option value="{{ $departamento->depa_codi }}" {{ $comuna->municipio && $comuna->municipio->depa_codi ==
-                      $departamento->depa_codi ? 'selected' : '' }}>
-                      {{ $departamento->depa_nomb }}
-                  </option>
-                  @endforeach
-              </select>
-          </div>
-          
-          <div class="mb-3">
-            <label for="pais_codi" class="form-label">País</label>
-            <select class="form-select" id="pais_codi" name="pais_codi">
-                <option value="">Seleccionar país</option>
-                @foreach ($paises as $pais)
-                    <option value="{{ $pais->pais_codi }}" {{ $comuna->municipio && $comuna->municipio->departamento && $comuna->municipio->departamento->pais_codi == $pais->pais_codi ? 'selected' : '' }}>
-                        {{ $pais->pais_nomb }}
-                    </option>
-                @endforeach
-            </select>
-        </div>>
+            
 
 
 
