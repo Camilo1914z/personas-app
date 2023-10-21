@@ -91,10 +91,16 @@ class ComunaController extends Controller
     public function edit($id)
     {
         $comuna = Comuna::find($id);
-        $municipios = DB::table('tb_municipio')
-        ->orderBy('muni_nomb')
-        ->get(); 
-        return view('comunas.edit', ['comuna' => $comuna, 'municipios' => $municipios]);
+        $municipios = DB::table('tb_municipio')->orderBy('muni_nomb')->get();
+        $departamentos = DB::table('tb_departamento')->orderBy('depa_nomb')->get();
+        $paises = DB::table('tb_pais')->orderBy('pais_nomb')->get(); // Obtener los países
+
+    return view('comunas.edit', [
+        'comuna' => $comuna,
+        'municipios' => $municipios,
+        'departamentos' => $departamentos,
+        'paises' => $paises, // Pasar los países a la vista
+    ]);
     }
 
     /**
