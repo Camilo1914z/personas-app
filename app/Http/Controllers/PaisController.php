@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pais;
+use App\Models\Departamento; 
+use App\Models\Municipio; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +17,13 @@ class PaisController extends Controller
      */
     public function index()
     {
-        $paises = Pais::all();
-        return view('paises.index', ["paises"=>$paises]);
+        $paises = DB::table('tb_pais')
+        ->join('tb_departamento', 'tb_pais.pais_codi', '=', 'tb_departamento.pais_codi')
+        ->join('tb_municipio', 'tb_departamento.depa_codi', '=', 'tb_municipio.depa_codi')
+        ->select('tb_pais.*', 'tb_departamento.*', 'tb_municipio.*')
+        ->get();
+
+    return view('paises.index', ['paises' => $paises]);
     }
 
     /**
@@ -26,7 +33,10 @@ class PaisController extends Controller
      */
     public function create()
     {
-        //
+        $paises = DB::table('tb_pais')
+        ->orderBy('pais_nomb')
+        ->get();
+        return view("paises.new", ['paises' => $paises]);
     }
 
     /**
@@ -37,7 +47,14 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pais = new Pais();
+        $pais->pais_nomb = $request->name;
+        $pais->pais_codi = $request->code;
+        $pais->save();
+        
+        return redirect()->route('paises.index')->with('success', 'País creado exitosamente');
+        
+    
     }
 
     /**
