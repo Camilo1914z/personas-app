@@ -27,6 +27,4 @@ Route::get('/comunas/create', [ComunaController::class, 'create'])->name('comuna
 Route::delete('/comunas/{comuna}', [ComunaController::class, 'destroy'])->name('comunas.destroy');
 Route::put('/comunas/{comuna}', [ComunaController::class, 'update'])->name('comunas.update');
 Route::get('/comunas/{comuna}/edit', [ComunaController::class, 'edit'])->name('comunas.edit');
-Route::get('/paises', [PaisController::class, 'index'])->name('paises.index');
-Route::post('/paises', [PaisController::class, 'store'])->name('paises.store');
-Route::get('/paises/create', [PaisController::class, 'create'])->name('paises.create');
+
